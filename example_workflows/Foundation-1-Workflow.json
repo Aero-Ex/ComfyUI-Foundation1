@@ -1,0 +1,687 @@
+{
+  "id": "09c953c3-53e0-4d75-995f-d07976d720dd",
+  "revision": 0,
+  "last_node_id": 32,
+  "last_link_id": 57,
+  "nodes": [
+    {
+      "id": 18,
+      "type": "MarkdownNote",
+      "pos": [
+        -440,
+        60
+      ],
+      "size": [
+        410,
+        270
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "properties": {
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "version": "7.7",
+          "input_ue_unconnectable": {}
+        }
+      },
+      "widgets_values": [
+        "\n## Model links\n\n**checkpoints**\n\n- [stable-audio-open-1.0.safetensors](https://huggingface.co/Comfy-Org/stable-audio-open-1.0_repackaged/resolve/main/stable-audio-open-1.0.safetensors)\n\n**text_encoders**\n\n- [t5-base.safetensors](https://huggingface.co/ComfyUI-Wiki/t5-base/resolve/main/t5-base.safetensors)\n\n\nModel Storage Location\n\n```\n📂 ComfyUI/\n├── 📂 models/\n│   ├── 📂 checkpoints/\n│   │      └── stable-audio-open-1.0.safetensors\n│   └── 📂 text_encoders/\n│          └── t5-base.safetensors\n```\n"
+      ],
+      "color": "#432",
+      "bgcolor": "#000"
+    },
+    {
+      "id": 10,
+      "type": "CLIPLoader",
+      "pos": [
+        0,
+        96
+      ],
+      "size": [
+        335.65,
+        106
+      ],
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "slot_index": 0,
+          "links": [
+            25,
+            26
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.17.0",
+        "Node name for S&R": "CLIPLoader",
+        "models": [
+          {
+            "name": "t5-base.safetensors",
+            "url": "https://huggingface.co/ComfyUI-Wiki/t5-base/resolve/main/t5-base.safetensors",
+            "directory": "text_encoders"
+          }
+        ],
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "version": "7.7",
+          "input_ue_unconnectable": {}
+        }
+      },
+      "widgets_values": [
+        "t5-base.safetensors",
+        "stable_audio",
+        "default"
+      ]
+    },
+    {
+      "id": 7,
+      "type": "CLIPTextEncode",
+      "pos": [
+        370,
+        290
+      ],
+      "size": [
+        432,
+        144
+      ],
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 26
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "slot_index": 0,
+          "links": [
+            54
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.17.0",
+        "Node name for S&R": "CLIPTextEncode",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "version": "7.7",
+          "input_ue_unconnectable": {}
+        }
+      },
+      "widgets_values": [
+        ""
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 21,
+      "type": "VAEDecodeAudio",
+      "pos": [
+        1236.7807847216714,
+        434.52800778053205
+      ],
+      "size": [
+        163.8534912109375,
+        46
+      ],
+      "flags": {},
+      "order": 9,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 56
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 33
+        }
+      ],
+      "outputs": [
+        {
+          "name": "AUDIO",
+          "type": "AUDIO",
+          "links": [
+            34
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.17.0",
+        "Node name for S&R": "VAEDecodeAudio",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.7"
+        }
+      },
+      "widgets_values": []
+    },
+    {
+      "id": 6,
+      "type": "CLIPTextEncode",
+      "pos": [
+        383.52962092528804,
+        103.38240073031233
+      ],
+      "size": [
+        432,
+        144
+      ],
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 25
+        },
+        {
+          "name": "text",
+          "type": "STRING",
+          "widget": {
+            "name": "text"
+          },
+          "link": 57
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "slot_index": 0,
+          "links": [
+            53
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.17.0",
+        "Node name for S&R": "CLIPTextEncode",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "version": "7.7",
+          "input_ue_unconnectable": {}
+        }
+      },
+      "widgets_values": [
+        "Piccolo, Flute, Airy, Music Box, plucked, complex melody, 8 Bars, 140 BPM, C# mino"
+      ],
+      "color": "#232",
+      "bgcolor": "#353"
+    },
+    {
+      "id": 4,
+      "type": "CheckpointLoaderSimple",
+      "pos": [
+        0,
+        240
+      ],
+      "size": [
+        336,
+        98
+      ],
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "slot_index": 0,
+          "links": [
+            52
+          ]
+        },
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "slot_index": 1,
+          "links": []
+        },
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "slot_index": 2,
+          "links": [
+            33,
+            50
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.17.0",
+        "Node name for S&R": "CheckpointLoaderSimple",
+        "models": [
+          {
+            "name": "stable-audio-open-1.0.safetensors",
+            "url": "https://huggingface.co/Comfy-Org/stable-audio-open-1.0_repackaged/resolve/main/stable-audio-open-1.0.safetensors",
+            "directory": "checkpoints"
+          }
+        ],
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "version": "7.7",
+          "input_ue_unconnectable": {}
+        }
+      },
+      "widgets_values": [
+        "Foundation_1.safetensors"
+      ]
+    },
+    {
+      "id": 29,
+      "type": "VAEEncodeAudio",
+      "pos": [
+        72.97470760069464,
+        460.02314238953795
+      ],
+      "size": [
+        224.17447622753403,
+        75.26292379011079
+      ],
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "audio",
+          "type": "AUDIO",
+          "link": 51
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 50
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            55
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.17.0",
+        "Node name for S&R": "VAEEncodeAudio",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.7"
+        }
+      },
+      "widgets_values": []
+    },
+    {
+      "id": 19,
+      "type": "SaveAudioMP3",
+      "pos": [
+        1454.197993841949,
+        35.342037436453985
+      ],
+      "size": [
+        270,
+        136
+      ],
+      "flags": {},
+      "order": 10,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "audio",
+          "type": "AUDIO",
+          "link": 34
+        }
+      ],
+      "outputs": [],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.17.0",
+        "Node name for S&R": "SaveAudioMP3",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "version": "7.7",
+          "input_ue_unconnectable": {}
+        }
+      },
+      "widgets_values": [
+        "audio/ComfyUI",
+        "V0"
+      ]
+    },
+    {
+      "id": 30,
+      "type": "LoadAudio",
+      "pos": [
+        -329.97555484487464,
+        421.8704487840703
+      ],
+      "size": [
+        283.2558135986328,
+        136
+      ],
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "AUDIO",
+          "type": "AUDIO",
+          "links": [
+            51
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.17.0",
+        "Node name for S&R": "LoadAudio",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.7"
+        }
+      },
+      "widgets_values": [
+        "MP3_2MG.mp3",
+        null,
+        null
+      ]
+    },
+    {
+      "id": 32,
+      "type": "Foundation1Prompt",
+      "pos": [
+        -13.995824108801486,
+        620.3460808096482
+      ],
+      "size": [
+        326.9551266820754,
+        361.80780369833997
+      ],
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            57
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Foundation1Prompt",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.7"
+        }
+      },
+      "widgets_values": [
+        "Vocal",
+        "Digital Piano",
+        "Warm, Bright",
+        "Melody",
+        "Medium Reverb",
+        "C minor",
+        120,
+        8
+      ]
+    },
+    {
+      "id": 31,
+      "type": "Foundation1KSampler",
+      "pos": [
+        891.5402023500772,
+        63.75708907486626
+      ],
+      "size": [
+        270,
+        310
+      ],
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 52
+        },
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 53
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 54
+        },
+        {
+          "name": "latent_audio",
+          "shape": 7,
+          "type": "LATENT",
+          "link": 55
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            56
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Foundation1KSampler",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.7"
+        }
+      },
+      "widgets_values": [
+        769226796124992,
+        "randomize",
+        50,
+        5,
+        "euler",
+        "simple",
+        0.7,
+        120,
+        8
+      ]
+    }
+  ],
+  "links": [
+    [
+      25,
+      10,
+      0,
+      6,
+      0,
+      "CLIP"
+    ],
+    [
+      26,
+      10,
+      0,
+      7,
+      0,
+      "CLIP"
+    ],
+    [
+      33,
+      4,
+      2,
+      21,
+      1,
+      "VAE"
+    ],
+    [
+      34,
+      21,
+      0,
+      19,
+      0,
+      "AUDIO"
+    ],
+    [
+      50,
+      4,
+      2,
+      29,
+      1,
+      "VAE"
+    ],
+    [
+      51,
+      30,
+      0,
+      29,
+      0,
+      "AUDIO"
+    ],
+    [
+      52,
+      4,
+      0,
+      31,
+      0,
+      "MODEL"
+    ],
+    [
+      53,
+      6,
+      0,
+      31,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      54,
+      7,
+      0,
+      31,
+      2,
+      "CONDITIONING"
+    ],
+    [
+      55,
+      29,
+      0,
+      31,
+      3,
+      "LATENT"
+    ],
+    [
+      56,
+      31,
+      0,
+      21,
+      0,
+      "LATENT"
+    ],
+    [
+      57,
+      32,
+      0,
+      6,
+      1,
+      "STRING"
+    ]
+  ],
+  "groups": [
+    {
+      "id": 1,
+      "title": "Load models",
+      "bounding": [
+        -10,
+        20,
+        356,
+        325.6
+      ],
+      "color": "#3f789e",
+      "font_size": 24,
+      "flags": {}
+    },
+    {
+      "id": 2,
+      "title": "Length",
+      "bounding": [
+        -10,
+        360,
+        343.28691581516375,
+        204.9925301299976
+      ],
+      "color": "#3f789e",
+      "font_size": 24,
+      "flags": {}
+    },
+    {
+      "id": 3,
+      "title": "Pormpt",
+      "bounding": [
+        360,
+        30,
+        452,
+        419.6
+      ],
+      "color": "#3f789e",
+      "font_size": 24,
+      "flags": {}
+    }
+  ],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 0.5262434554973822,
+      "offset": [
+        433.53346341655947,
+        678.8787377304948
+      ]
+    },
+    "frontendVersion": "1.41.19",
+    "workflowRendererVersion": "LG",
+    "ue_links": [],
+    "links_added_by_ue": [],
+    "VHS_latentpreview": false,
+    "VHS_latentpreviewrate": 0,
+    "VHS_MetadataImage": true,
+    "VHS_KeepIntermediate": true
+  },
+  "version": 0.4
+}
