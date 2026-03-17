@@ -32,21 +32,49 @@ class Foundation1Prompt:
     def INPUT_TYPES(s):
         return {
             "required": {
-                "major_family": ([
-                    "None", "Synth", "Keys", "Bass", "Bowed Strings", "Mallet", 
-                    "Wind", "Guitar", "Brass", "Vocal", "Plucked Strings"
-                ], {"default": "Synth"}),
-                "sub_family": ([
-                    "None", "Synth Lead", "Synth Bass", "Digital Piano", "Pluck", 
-                    "Grand Piano", "Bell", "Pad", "Atmosphere", "Digital Strings", 
-                    "FM Synth", "Violin", "Digital Organ", "Supersaw", "Wavetable Bass", 
-                    "Rhodes Piano", "Cello", "Texture", "Flute", "Reese Bass", 
-                    "Wavetable Synth", "Electric Bass", "Marimba", "Trumpet", 
-                    "Pan Flute", "Choir", "Harp", "Church Organ", "Acoustic Guitar", 
-                    "Hammond Organ", "Celesta", "Vibraphone", "Glockenspiel", 
-                    "Ocarina", "Clarinet", "French Horn", "Tuba", "Oboe"
+                "instrument": ([
+                    "None", "Synth Lead", "Synth Bass", "Digital Piano", "Pluck", "Grand Piano", "Bell",
+                    "Pad", "Atmosphere", "Digital Strings", "FM Synth", "Violin", "Digital Organ",
+                    "Supersaw", "Wavetable Bass", "Rhodes Piano", "Cello", "Texture", "Flute",
+                    "Reese Bass", "Wavetable Synth", "Electric Bass", "Marimba", "Synthetic",
+                    "Electric Guitar", "Sub Bass", "Trumpet", "Pan Flute", "Picked Bass",
+                    "Digital Bass", "Brass", "Saxophone", "Choir", "Harp", "Woodwinds",
+                    "Church Organ", "Pipe Organ", "Church Bell", "Koto", "Felt Piano",
+                    "Harpsichord", "Steel Drums", "Tubular Bells", "Organ", "Analog Bass",
+                    "Sitar", "Fiddle", "Piccolo", "World Winds", "Nylon Guitar", "Alto Sax",
+                    "Acoustic Guitar", "Soprano Sax", "FM Bass", "Celesta", "Clavinet",
+                    "Celtic Harp", "Concert Harp", "CP Piano", "Guitar", "Hammond Organ",
+                    "Tack Piano", "Wurlitzer Piano", "Music Box", "Analog Synth", "Kalimba",
+                    "Glockenspiel", "Vibraphone", "Ocarina", "Xylophone", "Viola",
+                    "Bass Trombone", "Tenor Trombone", "Tenor Sax", "Bassoon", "Irish Flute",
+                    "French Horn", "Synth", "Piano", "Clarinet", "Flugelhorn", "Baritone Sax",
+                    "Tuba", "Oboe"
                 ], {"default": "Synth Lead"}),
-                "timbre": ("STRING", {"multiline": True, "default": "Warm, Bright"}),
+                "timbre_preset": ([
+                    "None", "Warm", "Bright", "Gritty", "Clean", "Retro", "Snappy", "Crisp",
+                    "Dark", "Shiny", "Analog", "Digital", "Ambient", "Soft", "Smooth", "Buzzy",
+                    "Overdriven", "Woody", "Biting", "Fat", "Nasal", "Intimate", "Glassy",
+                    "Breathy", "Metallic", "Spacey", "Cold", "Subdued", "Deep", "Round",
+                    "Hollow", "Punchy", "Vintage", "Harsh", "Muddy", "Muffled", "Thin",
+                    "Thick", "Airy", "Rich", "Tight", "Full", "Silky", "Sparkly", "Big",
+                    "Small", "Distant", "Near", "Wide", "Mono", "Noisy"
+                ], {"default": "None"}),
+                "genre": ([
+                    "None", "Cinematic", "Lo-fi", "Techno", "House", "Ambient", "Jazz",
+                    "Rock", "Hip Hop", "Electronica", "Classical", "Pop", "Funk", "Soul",
+                    "R&B", "Trap", "Drum and Bass", "Synthwave", "Cyberpunk", "Orchestral",
+                    "World", "Folk", "Country", "Blues"
+                ], {"default": "None"}),
+                "mood": ([
+                    "None", "Epic", "Chill", "Aggressive", "Sad", "Happy", "Mysterious",
+                    "Dark", "Energetic", "Relaxed", "Tense", "Dreamy", "Nostalgic",
+                    "Suspenseful", "Uplifting", "Melancholic", "Ethereal", "Grimy"
+                ], {"default": "None"}),
+                "recording_style": ([
+                    "None", "Studio", "Live", "Raw", "Processed", "Analog", "Digital",
+                    "Lo-fi", "High-fidelity", "Boutique", "Vintage", "Modern"
+                ], {"default": "None"}),
+                "timbre": ("STRING", {"multiline": True, "default": ""}),
                 "notation": ("STRING", {"multiline": True, "default": "Melody"}),
                 "fx": ("STRING", {"multiline": True, "default": "Medium Reverb"}),
                 "key": ([
@@ -63,8 +91,20 @@ class Foundation1Prompt:
     FUNCTION = "build"
     CATEGORY = "Foundation1"
 
-    def build(self, major_family, sub_family, timbre, notation, fx, key, bpm, bars):
-        prompt = build_foundation1_prompt(major_family, sub_family, timbre, fx, notation, key, bars, bpm)
+    def build(self, instrument, timbre_preset, genre, mood, recording_style, timbre, notation, fx, key, bpm, bars):
+        prompt = build_foundation1_prompt(
+            genre=genre,
+            mood=mood,
+            instrument=instrument,
+            timbre=timbre,
+            timbre_preset=timbre_preset,
+            notation=notation,
+            fx=fx,
+            recording_style=recording_style,
+            key=key,
+            bars=bars,
+            bpm=bpm
+        )
         return (prompt,)
 
 class Foundation1KSampler:
