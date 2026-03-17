@@ -1,7 +1,7 @@
 [project]
 name = "ComfyUI-Foundation1"
 description = "Custom nodes for the Foundation-1 audio model in ComfyUI, providing BPM-aware generation and streamlined audio workflows."
-version = "0.1.0"
+version = "0.1.1"
 license = "MIT"
 dynamic = ["dependencies"]
 readme = "README.md"
